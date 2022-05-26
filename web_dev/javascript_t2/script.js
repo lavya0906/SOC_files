@@ -8,9 +8,16 @@ let displayHours = 0;
 
 let interval = null;
 let value = "stopped";
-let nowtime = 0;
 let num = 1;
-let i = 0;
+let i = 1;
+let arrh = new Array();
+let arrm = new Array();
+let arrs = new Array();
+arrh.push(00);
+arrm.push(00);
+arrs.push(00);
+
+
 
 
 function stopWatch() {
@@ -78,7 +85,6 @@ function startStop() {
 
 function resetLap() {
 
-
     if (document.getElementById("reset").innerHTML == "Lap") {
         localStorage.setItem("hours", displayHours);
         localStorage.setItem("minutes", displayMinutes);
@@ -86,15 +92,17 @@ function resetLap() {
         let table1 = localStorage.getItem('hours');
         let table2 = localStorage.getItem('minutes');
         let table3 = localStorage.getItem('seconds');
-        let arrh = new Array();
-        let arrm = new Array();
-        let arrs = new Array();
         arrh.push(table1);
         arrm.push(table2);
         arrs.push(table3);
-        s = arrs[i];
+        s = arrs[i] - arrs[i - 1];
+        m = arrm[i] - arrm[i - 1];
+        h = arrh[i] - arrh[i - 1];
+        laps = "0" + s.toString();
+        lapm = "0" + m.toString();
+        laph = "0" + h.toString();
         i = i + 1;
-        document.getElementById("Lap-Record").innerHTML += "<tr><td>" + "#" + num + "</td>" + "     " + "<td>" + table1 + ":" + table2 + ":" + table3 + "</td ></tr>";
+        document.getElementById("Lap-Record").innerHTML += "<tr><td>" + "#" + num + "</td>" + "     " + "<td>" + table1 + ":" + table2 + ":" + table3 + "</td>" + "  " + "<td>" + "+" + laph + ":" + lapm + ":" + laps + "</td ></tr>";
         num = num + 1;
 
 
